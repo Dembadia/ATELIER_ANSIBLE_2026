@@ -90,27 +90,43 @@ Faites preuve de pédagogie et soyez clair dans vos explications et procedures d
 **Question 1 :**  
 Pourquoi Ansible est-il qualifié d’outil "déclaratif" ?    
   
-*..Répondez à cet exercice ici..*
+ On lui décrit le résultat attendu (le quoi), pas la liste des commandes à exécuter (le comment).
+
+Concept clé : L'idempotence. Si le serveur est déjà dans l'état demandé, Ansible ne fait rien.
 
 **Question 2 :**  
 Pourquoi l’utilisation de variables est-elle essentielle dans un playbook ?  
   
-*..Répondez à cet exercice ici..*
+Pour éviter de copier des valeurs "en dur" au milieu du code.
+
+Avantages : * Maintenance : On modifie la valeur à un seul endroit (vars:).
+
+Réutilisabilité : Le même playbook peut servir pour le développement ou la production, seules les variables changent.
 
 **Question 3 :**  
 En quoi Ansible facilite-t-il la gestion de plusieurs serveurs ?  
   
-*..Répondez à cet exercice ici..*
+Grâce à deux piliers indispensables.
+
+Le secret :
+
+L'Inventaire : Permet de cibler des groupes entiers de machines simultanément.
+
+L'architecture "Agentless" : Pas de logiciel à installer sur les cibles, Ansible communique directement et rapidement par SSH.
 
 **Question 4 :**  
 Quels sont les avantages et les limites d’Ansible dans un contexte DevOps ?   
   
-*..Répondez à cet exercice ici..*
+Avantages : Syntaxe YAML très simple, automatisation rapide, et transformation de l'infrastructure en code (IaC) versionnable sur Git.
+
+Limites : Ne gère pas un "état" persistant (si on supprime une tâche du playbook, il ne supprime pas la ressource sur le serveur). Peut devenir lent sur des parcs de milliers de machines en SSH direct.
   
 **Question 5 :**  
 Quelle est la différence entre les modules copy et template dans Ansible ?   
   
-*..Répondez à cet exercice ici..*
+copy (Statique) : Fait un copier-coller brut d'un fichier. Si le fichier contient des accolades {{ ... }}, elles restent écrites telles quelles.
+
+template (Dynamique) : Utilise le moteur Jinja2 pour analyser le fichier avant l'envoi. Il remplace toutes les variables {{ ... }} par leurs vraies valeurs (comme nom et prénom dans l'exercice).
 
 ---------------------------------------------------
 Séquence 5 : Atelier  

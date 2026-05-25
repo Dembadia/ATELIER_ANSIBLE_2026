@@ -1,6 +1,6 @@
 ---
 - name: Atelier Ansible dans GitHub Codespaces - version durcie avec remédiation
-  hosts: local
+  hosts: all
   become: true
   gather_facts: true
 
@@ -8,6 +8,10 @@
     page_dest: /var/www/html/index.html
     yarn_repo_file: /etc/apt/sources.list.d/yarn.list
     yarn_repo_disabled_file: /etc/apt/sources.list.d/yarn.list.disabled
+    # ─── ÉTAPE 1 : AJOUT DES VARIABLES DE L'EXERCICE 2 ───
+    #page_title: "Serveur déployé avec Ansible"
+    #author: "Dia"         #  nom
+    #app_user: "Demba"     #  prénom
 
   tasks:
     - name: Afficher le système cible
@@ -51,9 +55,10 @@
         group: root
         mode: "0755"
 
-    - name: Déployer la page HTML personnalisée
-      copy:
-        src: files/index.html
+    # ─── ÉTAPE 2 & 3 : REMPLACEMENT DE COPY PAR TEMPLATE ───
+    - name: Déploiement de la page HTML personnalisée
+      ansible.builtin.template:       # Changé 'copy' par 'template'
+        src: files/index.html              
         dest: "{{ page_dest }}"
         owner: root
         group: root
